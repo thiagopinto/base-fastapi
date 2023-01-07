@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from app.core.models import Status
-from app.core.user.models import UserIn, UserOut, UserPydantic, Users
+from app.core.user.models import Users
+from app.core.user.serializers import UserIn, UserOut, UserPydantic
 from app.core.user.services import Auth, Protect
 
 protect = Protect.end_point_by_password()

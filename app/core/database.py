@@ -1,6 +1,7 @@
 from app.core.config import settings
 from pydantic import PostgresDsn
 from tortoise.contrib.fastapi import register_tortoise
+from tortoise import Tortoise
 
 
 POSTGRES_DSN = PostgresDsn.build(
@@ -30,3 +31,10 @@ def init_db(app):
         generate_schemas=True,
         add_exception_handlers=True,
     )
+
+async def init_db_seeds():
+    await Tortoise.init(
+        db_url=str(POSTGRES_DSN),
+        modules={"models": ["app.core.user.models"]}
+    )
+    print("Initialized connection")
